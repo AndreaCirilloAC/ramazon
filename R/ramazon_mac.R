@@ -1,7 +1,10 @@
 ramazon( Public_DNS = "", key_pair_name = ""){
 
 # establish a connection with amazon AWS instance
+
 key_pair_address = paste(getwd(),key_pair_name,"pem", sep ="")
+command = paste("chmod 400 ",key_pair_address,sep ="")
+system(command,intern = TRUE)
 command = paste("ssh -i -v ",key_pair_address,"ubuntu@",Public_DNS,sep ="")
 system(command, intern = TRUE)
 
