@@ -17,4 +17,4 @@ run your shiny App on Amazon AWS launching a function.
 * Copy your shiny app on Amazon Server
 
 You are not getting it?
-No problem, just run Ramazon!
+No problem, just run Ramazon()!
