@@ -7,7 +7,7 @@ run your shiny App on Amazon AWS launching a function.
 3. run `ramazon(public_DNS, key_pair_name)`
 4. watch your app on Amazon!
 
-##What Ramazon takes care of
+##What ramazon takes care of
 
 * establish a connection
 * modify sources.list to add R Cran Server
