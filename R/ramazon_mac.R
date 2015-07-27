@@ -1,4 +1,10 @@
-ramazon( Public_DNS = "", key_pair_name = ""){
+###############################################################
+#custom function to run shiny app on Amazon AWS instance
+#Copyright 2015 Andrea Cirillo
+#License: MIT license
+###############################################################
+
+ramazon <- function( Public_DNS = "", key_pair_name = ""){
 
 # establish a connection with amazon AWS instance
 
