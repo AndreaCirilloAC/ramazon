@@ -4,21 +4,20 @@
 #License: MIT license
 ###############################################################
 
-ramazon <- function(Public_DNS = "", key_pair_name = ""){
+ramazon <- function(Public_DNS, key_pair_name){
 
 #set useful variables
 cd = getwd()
-key_pair_address = paste(cd,key_pair_name,".pem", sep = "")
-user_server = paste(key_pair_address,"ubuntu@",Public_DNS, sep = "")
+key_pair_address = paste(cd,"/",key_pair_name,".pem", sep = "")
+user_server = paste("ubuntu@",Public_DNS, sep = "")
 command = paste("chmod 400 ",key_pair_address,sep = "")
 system(command,intern = TRUE)
 
-
-
 # establish a connection with amazon AWS instance
-command = paste("ssh -i -v ",user_server,sep = "")
+command = paste("ssh -v -i ",key_pair_address, " ",user_server,sep = "")
+print(command)
 system(command, intern = TRUE)
-
+print ("connection end")
 # modify sources.list file
 system("sudo apt-get update", intern = TRUE)
 system("sudo apt-get upgrade", intern = TRUE)
@@ -53,4 +52,3 @@ command      = paste("scp",from_address,to_address,sep = " ")
 app_url = paste(Public_DNS,":3838",sep = "")
 browseURL(app_url)
 }
-ramazon("ec2-54-84-184-102.compute-1.amazonaws.com","keypair")
