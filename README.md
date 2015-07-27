@@ -4,7 +4,7 @@ run your shiny App on Amazon AWS launching a function.
 0: Develop your Shiny App
 1: Launch an instance on amazon AWS
 2: save your key pair into you shiny app folder
-3: run 'Ramazon(public_DNS : "", key_pair_name = "")'
+3: run `Ramazon(public_DNS : "", key_pair_name = "")`
 4:watch your app on Amazon!
 
 ##What Ramazon take care of
