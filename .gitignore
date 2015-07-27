@@ -4,6 +4,7 @@
 
 # Example code in package build process
 *-Ex.R
+*test.R
 
 # RStudio files
 .Rproj.user/
