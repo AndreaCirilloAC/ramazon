@@ -4,7 +4,7 @@
 #License: MIT license
 ###############################################################
 
-ramazon <- function( Public_DNS = "", key_pair_name = ""){
+ramazon <- function(Public_DNS = "", key_pair_name = ""){
 
 #set useful variables
 cd = getwd()
