@@ -12,3 +12,6 @@
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
+
+#key pair
+*keypair.pem
