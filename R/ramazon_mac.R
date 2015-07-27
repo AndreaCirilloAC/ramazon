@@ -6,22 +6,22 @@
 
 ramazon <- function( Public_DNS = "", key_pair_name = ""){
 
-# establish a connection with amazon AWS instance
-
+#set useful variables
 cd = getwd()
 key_pair_address = paste(cd,key_pair_name,"pem", sep ="")
 user_server = paste(key_pair_address,"ubuntu@",Public_DNS, sep ="")
-
 command = paste("chmod 400 ",key_pair_address,sep ="")
 system(command,intern = TRUE)
+
+# establish a connection with amazon AWS instance
 command = paste("ssh -i -v ",user_server,sep ="")
 system(command, intern = TRUE)
 
 # modify sources.list file
 system("sudo apt-get update", intern = TRUE)
 system("sudo apt-get upgrade", intern = TRUE)
-system("sudo nano /etc/apt/sources.list", intern = TRUE)
-# MISSING CODE (append text to sources.list)
+system("echo 'deb https://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list-new", intern = TRUE)
+system("mv /etc/apt/sources.list-new /etc/apt/sources.list",intern =TRUE)
 
 # install latest R version
 system("sudo apt-get install -y r-base", intern = TRUE)
