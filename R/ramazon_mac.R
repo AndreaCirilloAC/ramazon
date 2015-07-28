@@ -47,8 +47,19 @@ from_address = paste( getwd(),files[i],sep = "/")
 to_address   = paste( user_server,"srv/shiny-server",files [i],sep = "/")
 command      = append(command,paste("scp",from_address,to_address,sep = " "))
 }
+
+#write file
+
 writeLines(command, connection)
 close(connection)
+
+#rename file
+file.rename("bash_script.txt","bash_script.sh")
+
+#set execute permission to the script
+system("sudo chmod 700 bash_script.sh")
+#run script
+system("./bash_script.sh")
 # navigate the app in a browser
 app_url = paste(Public_DNS,":3838",sep = "")
 browseURL(app_url)

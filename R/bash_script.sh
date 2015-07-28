@@ -13,6 +13,5 @@ rm -Rf /srv/shiny-server/example.R
 rm -Rf /srv/shiny-server/example.R
 scp C:/Users/2000333/Desktop/ramazon/R/keypair.pem ubuntu@ec2-54-84-184-102.compute-1.amazonaws.com/srv/shiny-server/keypair.pem
 scp C:/Users/2000333/Desktop/ramazon/R/ramazon_mac.R ubuntu@ec2-54-84-184-102.compute-1.amazonaws.com/srv/shiny-server/ramazon_mac.R
-scp C:/Users/2000333/Desktop/ramazon/R/scratch.R ubuntu@ec2-54-84-184-102.compute-1.amazonaws.com/srv/shiny-server/scratch.R
 scp C:/Users/2000333/Desktop/ramazon/R/temporary.txt ubuntu@ec2-54-84-184-102.compute-1.amazonaws.com/srv/shiny-server/temporary.txt
 scp C:/Users/2000333/Desktop/ramazon/R/test.R ubuntu@ec2-54-84-184-102.compute-1.amazonaws.com/srv/shiny-server/test.R
