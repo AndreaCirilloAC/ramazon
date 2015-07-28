@@ -19,6 +19,7 @@ print(command)
 system(command)
 print ("connection end")
 
+#commenting
 # modify sources.list file
 system("sudo apt-get update")
 system("sudo apt-get upgrade")
