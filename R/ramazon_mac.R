@@ -11,23 +11,23 @@ cd = getwd()
 key_pair_address = paste(cd,"/",key_pair_name,".pem", sep = "")
 user_server = paste("ubuntu@",Public_DNS, sep = "")
 #open file connection
-connection         <-  file("bash_script.txt")
-command = paste("chmod 400 ",key_pair_address,sep = "")
-
+connection <-  file("bash_script.txt")
+command    <-  paste("chmod 400 ",key_pair_address,sep = "")
+system(command)
 # modify sources.list file
-command <- ("sudo apt-get update")
-command <- append(command,"sudo apt-get upgrade")
-
-command <- append(command, "echo 'deb https://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list-new")
-command <- append(command, "mv /etc/apt/sources.list-new /etc/apt/sources.list")
+command    <- ("sudo apt-get -y update")
+command    <- append(command,"sudo apt-get -y upgrade")
+command    <- append(command, "echo 'deb https://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list-new")
+command    <- append(command, "mv /etc/apt/sources.list-new /etc/apt/sources.list")
 
 # install latest R version
-command <- append(command, "sudo apt-get install -y r-base")
+command    <- append(command, "sudo apt-get install -y r-base")
 
 #install packages (LOOP)
 
 # install latest Shiny server version
-command <- append(command,"sudo apt-get install gdebi-core")
+command <- append(command,"echo R installed")
+command <- append(command,"sudo apt-get install -y gdebi-core")
 command <- append(command,"wget http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.3.0.403-amd64.deb")
 command <- append(command,"sudo gdebi shiny-server-1.3.0.403-amd64.deb")
 
@@ -41,7 +41,7 @@ command <- append(command,"sudo gdebi shiny-server-1.3.0.403-amd64.deb")
 files = list.files(getwd()) # list file within the current directory ( subdirectories not included)
 for (i in 1:length(files)){ # loop files to copy file into the server instance
 from_address = paste( getwd(),files[i],sep = "/")
-to_address   = paste( user_server,"srv/shiny-server",files [i],sep = "/")
+to_address   = paste( user_server,"srv/shiny-server",files[i],sep = "/")
 command      = append(command,paste("scp",from_address,to_address,sep = " "))
 }
 
@@ -58,7 +58,7 @@ file.rename("bash_script.txt","bash_script.sh")
 system("chmod 700 bash_script.sh")
 
 #connect and run script on remote server
-command <- paste("ssh -o StrictHostKeyChecking=no -v -i ",key_pair_address, " ",user_server,"'bash -s' < R/bash_script.sh",sep = "")
+command <- paste("ssh -o StrictHostKeyChecking=no -v -i ",key_pair_address, " ",user_server," 'bash -s' < bash_script.sh",sep = "")
 system(command)
 
 # navigate the app in a browser
