@@ -14,7 +14,7 @@ command = paste("chmod 400 ",key_pair_address,sep = "")
 system(command,intern = TRUE)
 
 # establish a connection with amazon AWS instance
-command = paste("ssh -v -i ",key_pair_address, " ",user_server,sep = "")
+command = paste("ssh -o StrictHostKeyChecking=no -v -i ",key_pair_address, " ",user_server,sep = "")
 print(command)
 system(command, intern = TRUE)
 print ("connection end")
