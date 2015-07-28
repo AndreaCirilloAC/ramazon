@@ -26,10 +26,10 @@ command    <- append(command, "sudo apt-get install -y r-base")
 #install packages (LOOP)
 
 # install latest Shiny server version
-command <- append(command,"echo R installed")
+command <- append(command,"echo 'R installed'")
 command <- append(command,"sudo apt-get install -y gdebi-core")
 command <- append(command,"wget http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.3.0.403-amd64.deb")
-command <- append(command,"sudo gdebi shiny-server-1.3.0.403-amd64.deb")
+command <- append(command,"sudo -y gdebi shiny-server-1.3.0.403-amd64.deb")
 
 # delete standard example
 # command <- append(command,"rm -Rf /srv/shiny-server/example.R")
