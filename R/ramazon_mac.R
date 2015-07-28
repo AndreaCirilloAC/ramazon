@@ -18,6 +18,7 @@ command = paste("ssh -o StrictHostKeyChecking=no -v -i ",key_pair_address, " ",u
 print(command)
 system(command)
 print ("connection end")
+
 # modify sources.list file
 system("sudo apt-get update")
 system("sudo apt-get upgrade")
