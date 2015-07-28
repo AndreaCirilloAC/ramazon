@@ -15,7 +15,7 @@ connection         <-  file("bash_script.txt")
 command = paste("chmod 400 ",key_pair_address,sep = "")
 # establish a connection with amazon AWS instance
 command = append(command, paste("ssh -o StrictHostKeyChecking=no -v -i ",key_pair_address, " ",user_server,sep = ""))
-print ("connection end")
+print("connection end")
 
 # modify sources.list file
 command <- append(command,"sudo apt-get update")
@@ -35,9 +35,9 @@ command <- append(command,"wget http://download3.rstudio.org/ubuntu-12.04/x86_64
 command <- append(command,"sudo gdebi shiny-server-1.3.0.403-amd64.deb")
 
 # delete standard example
-command <- append(command,"rm -Rf /srv/shiny-server/example.R")
-command <- append(command,"rm -Rf /srv/shiny-server/example.R")
-command <- append(command,"rm -Rf /srv/shiny-server/example.R")
+# command <- append(command,"rm -Rf /srv/shiny-server/example.R")
+# command <- append(command,"rm -Rf /srv/shiny-server/example.R")
+# command <- append(command,"rm -Rf /srv/shiny-server/example.R")
 # MISSING CODE(specify files to be removed)
 
 # paste shiny app files
@@ -57,9 +57,13 @@ close(connection)
 file.rename("bash_script.txt","bash_script.sh")
 
 #set execute permission to the script
-system("sudo chmod 700 bash_script.sh")
-#run script
-system("./bash_script.sh")
+
+system("chmod 700 bash_script.sh")
+
+#connect and run script on remote server
+command <- paste("ssh -o StrictHostKeyChecking=no -v -i ",key_pair_address, " ",user_server,"'bash -s' < R/bash_script.sh",sep = "")
+system(command)
+
 # navigate the app in a browser
 app_url = paste(Public_DNS,":3838",sep = "")
 browseURL(app_url)
