@@ -13,12 +13,9 @@ user_server = paste("ubuntu@",Public_DNS, sep = "")
 #open file connection
 connection         <-  file("bash_script.txt")
 command = paste("chmod 400 ",key_pair_address,sep = "")
-# establish a connection with amazon AWS instance
-command = append(command, paste("ssh -o StrictHostKeyChecking=no -v -i ",key_pair_address, " ",user_server,sep = ""))
-print("connection end")
 
 # modify sources.list file
-command <- append(command,"sudo apt-get update")
+command <- ("sudo apt-get update")
 command <- append(command,"sudo apt-get upgrade")
 
 command <- append(command, "echo 'deb https://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list-new")
