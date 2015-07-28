@@ -19,10 +19,10 @@ print(command)
 system(command)
 print ("connection end")
 # modify sources.list file
-system("sudo apt-get update", intern = TRUE)
-system("sudo apt-get upgrade", intern = TRUE)
+system("sudo apt-get update")
+system("sudo apt-get upgrade")
 system("echo 'deb https://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list-new", intern = TRUE)
-system("mv /etc/apt/sources.list-new /etc/apt/sources.list",intern = TRUE)
+system("mv /etc/apt/sources.list-new /etc/apt/sources.list")
 
 # install latest R version
 system("sudo apt-get install -y r-base", intern = TRUE)
