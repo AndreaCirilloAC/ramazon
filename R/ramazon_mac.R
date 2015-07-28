@@ -16,7 +16,7 @@ system(command,intern = TRUE)
 # establish a connection with amazon AWS instance
 command = paste("ssh -o StrictHostKeyChecking=no -v -i ",key_pair_address, " ",user_server,sep = "")
 print(command)
-system(command, intern = TRUE)
+system(command)
 print ("connection end")
 # modify sources.list file
 system("sudo apt-get update", intern = TRUE)
