@@ -43,7 +43,7 @@ files = list.files(getwd()) # list file within the current directory ( subdirect
 
 from_address <-  getwd()
 to_address   <-  paste( user_server,":srv/shiny-server/",files[i],sep = "")
-command      <-  append(command,paste("scp",from_address,to_address,sep = " "))
+command      <-  append(command,paste("scp -r",from_address,to_address,sep = " "))
 
 }
 
