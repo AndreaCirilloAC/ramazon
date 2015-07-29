@@ -1,2 +1,0 @@
-chmod 400 /Users/andrea_cirillo/Library/Mobile Documents/com~apple~CloudDocs/R_projects/ramazon/R/keypair.pem
-ssh -o StrictHostKeyChecking=no -v -i /Users/andrea_cirillo/Library/Mobile Documents/com~apple~CloudDocs/R_projects/ramazon/R/keypair.pem ubuntu@ec2-54-84-184-102.compute-1.amazonaws.com

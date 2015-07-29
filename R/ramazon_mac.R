@@ -35,17 +35,16 @@ command <- append(command,"sudo gdebi --non-interactive shiny-server-1.3.0.403-a
 command <- append(command,"sudo chown -R ubuntu /srv/")
 
 # delete standard example
-command <- append(command,"rm -Rf /srv/shiny-server")
-# command <- append(command,"rm -Rf /srv/shiny-server/example.R")
-# command <- append(command,"rm -Rf /srv/shiny-server/example.R")
-# MISSING CODE(specify files to be removed)
+command  <- append(command,"rm -Rf /srv/shiny-server/index.html")
+command  <- append(command,"rm -Rf /srv/shiny-server/sample-apps")
 
 # paste shiny app files
 files = list.files(getwd()) # list file within the current directory ( subdirectories not included)
 for (i in 1:length(files)){ # loop files to copy file into the server instance
 from_address = paste( getwd(),files[i],sep = "/")
-to_address   = paste( user_server,"srv/shiny-server",files[i],sep = "/")
+to_address   = paste( user_server,":srv/shiny-server/",files[i],sep = "")
 command      = append(command,paste("scp",from_address,to_address,sep = " "))
+
 }
 
 #write file
