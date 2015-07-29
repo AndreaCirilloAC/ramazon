@@ -40,10 +40,10 @@ command  <- append(command,"rm -Rf /srv/shiny-server/sample-apps")
 
 # paste shiny app files
 files = list.files(getwd()) # list file within the current directory ( subdirectories not included)
-for (i in 1:length(files)){ # loop files to copy file into the server instance
-from_address = paste( getwd(),files[i],sep = "/")
-to_address   = paste( user_server,":srv/shiny-server/",files[i],sep = "")
-command      = append(command,paste("scp",from_address,to_address,sep = " "))
+
+from_address <-  getwd()
+to_address   <-  paste( user_server,":srv/shiny-server/",files[i],sep = "")
+command      <-  append(command,paste("scp",from_address,to_address,sep = " "))
 
 }
 
