@@ -11,7 +11,7 @@ run your shiny App on Amazon AWS launching a function.
 
 * establish a connection
 * modify sources.list to add R Cran Server
-* Install an update version of R
+* Install an updated version of R
 * Install R Studio Server
 * Remove Example page from R studio Server
 * Copy your shiny app on Amazon Server
