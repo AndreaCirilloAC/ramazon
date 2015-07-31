@@ -10,5 +10,3 @@ sudo gdebi --non-interactive shiny-server-1.3.0.403-amd64.deb
 sudo chown -R ubuntu /srv/
 rm -Rf /srv/shiny-server/index.html
 rm -Rf /srv/shiny-server/sample-apps
-exit
-scp -v -i /Users/andrea_cirillo/Dropbox/R_projects/ramazon/R/keypair.pem -r /Users/andrea_cirillo/Dropbox/R_projects/ramazon/R ubuntu@ec2-52-2-146-102.compute-1.amazonaws.com:/srv/shiny-server/

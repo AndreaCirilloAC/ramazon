@@ -37,15 +37,6 @@ command <- append(command,"sudo chown -R ubuntu /srv/")
 # delete standard example
 command  <- append(command,"rm -Rf /srv/shiny-server/index.html")
 command  <- append(command,"rm -Rf /srv/shiny-server/sample-apps")
-command  <- append(command,"exit")
-# paste shiny app files
-#files = list.files(getwd()) # list file within the current directory ( subdirectories not included)
-
-from_address <-  getwd()
-to_address   <-  paste( user_server,":/srv/shiny-server/",sep = "")
-command      <-  append(command,paste("scp -v -i",key_pair_address, "-r",from_address,to_address,sep = " "))
-
-#scp -v -i /Users/andrea_cirillo/Dropbox/R_projects/ramazon/R/keypair.pem /Users/andrea_cirillo/Dropbox/R_projects/ramazon/R/test.R ubuntu@ec2-52-2-146-102.compute-1.amazonaws.com:/srv/shiny-server/test.R
 
 #write file
 
@@ -62,6 +53,18 @@ system("chmod 700 bash_script.sh")
 #connect and run script on remote server
 command <- paste("ssh -o StrictHostKeyChecking=no -v -i ",key_pair_address, " ",user_server," 'bash -s' < bash_script.sh",sep = "")
 system(command)
+
+system("exit")
+# paste shiny app files
+
+from_address <-  getwd()
+to_address   <-  paste( user_server,":/srv/shiny-server/",sep = "")
+
+#copy from folder recursively
+
+system(paste("scp -v -i",key_pair_address, "-r",from_address,to_address,sep = " "))
+
+
 
 # navigate the app in a browser
 app_url = paste(Public_DNS,":3838",sep = "")
