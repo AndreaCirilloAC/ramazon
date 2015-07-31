@@ -37,15 +37,15 @@ command <- append(command,"sudo chown -R ubuntu /srv/")
 # delete standard example
 command  <- append(command,"rm -Rf /srv/shiny-server/index.html")
 command  <- append(command,"rm -Rf /srv/shiny-server/sample-apps")
-
+command  <- append(command,"exit")
 # paste shiny app files
-files = list.files(getwd()) # list file within the current directory ( subdirectories not included)
+#files = list.files(getwd()) # list file within the current directory ( subdirectories not included)
 
 from_address <-  getwd()
-to_address   <-  paste( user_server,":srv/shiny-server/",files[i],sep = "")
-command      <-  append(command,paste("scp -r",from_address,to_address,sep = " "))
+to_address   <-  paste( user_server,":/srv/shiny-server/",sep = "")
+command      <-  append(command,paste("scp -v -i",key_pair_address, "-r",from_address,to_address,sep = " "))
 
-}
+#scp -v -i /Users/andrea_cirillo/Dropbox/R_projects/ramazon/R/keypair.pem /Users/andrea_cirillo/Dropbox/R_projects/ramazon/R/test.R ubuntu@ec2-52-2-146-102.compute-1.amazonaws.com:/srv/shiny-server/test.R
 
 #write file
 
