@@ -64,9 +64,11 @@ to_address   <-  paste( user_server,":/srv/shiny-server/",sep = "")
 
 system(paste("scp -v -i",key_pair_address, "-r",from_address,to_address,sep = " "))
 
-
-
 # navigate the app in a browser
 app_url = paste(Public_DNS,":3838",sep = "")
-browseURL(app_url)
+print("WELL DONE!")
+print("you can find your shiny app at the following URL:")
+print(app_url)
+
 }
+
