@@ -17,8 +17,9 @@ system(command)
 # modify sources.list file
 command    <- ("sudo apt-get -y update")
 command    <- append(command,"sudo apt-get -y upgrade")
-command    <- append(command, "echo 'deb https://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list-new")
-command    <- append(command, "mv /etc/apt/sources.list-new /etc/apt/sources.list")
+#command    <- append(command, "echo 'deb https://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list-new")
+command    <- append(command, "echo 'deb https://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list")
+#command    <- append(command, "mv /etc/apt/sources.list-new /etc/apt/sources.list")
 
 # install latest R version
 command    <- append(command, "sudo apt-get install -y r-base")

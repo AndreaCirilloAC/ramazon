@@ -1,7 +1,6 @@
 sudo apt-get -y update
 sudo apt-get -y upgrade
-echo 'deb https://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list-new
-mv /etc/apt/sources.list-new /etc/apt/sources.list
+echo 'deb https://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list
 sudo apt-get install -y r-base
 echo 'R installed'
 sudo apt-get install -y gdebi-core
