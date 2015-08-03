@@ -1,10 +1,7 @@
 sudo apt-get -y update
-sudo apt-get -y upgrade
 sudo chown -R ubuntu /etc/apt
 sudo apt-key adv -keyserver keyserver.ubuntu.com -recv-keys E084DAB9
 sudo add-apt-repository 'deb http://star-www.st-andrews.ac.uk/cran/bin/linux/ubuntu trusty/'
-sudo apt-get update
-sudo apt-get install r-base
 sudo apt-get -y update
 sudo apt-get install -y r-base
 echo 'R installed'
