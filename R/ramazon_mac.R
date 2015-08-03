@@ -14,8 +14,7 @@ user_server = paste("ubuntu@",Public_DNS, sep = "")
 connection <-  file("bash_script.txt")
 command    <-  paste("chmod 400 ",key_pair_address,sep = "")
 system(command)
-# modify sources.list file
-
+# modify sources.list file to add cran repository
 
 command    <- ("sudo apt-get -y update")
 command    <- append(command,"sudo apt-get -y upgrade")
@@ -36,7 +35,7 @@ command <- append(command,"wget http://download3.rstudio.org/ubuntu-12.04/x86_64
 command <- append(command,"sudo gdebi --non-interactive shiny-server-1.3.0.403-amd64.deb")
 
 # add deleting permission
-command <- append(command,"sudo chown -R ubuntu /srv/apt")
+command <- append(command,"sudo chown -R ubuntu /srv/")
 
 # delete standard example
 command  <- append(command,"rm -Rf /srv/shiny-server/index.html")
