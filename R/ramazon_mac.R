@@ -23,7 +23,7 @@ command <- append(command,"sudo add-apt-repository 'deb http://star-www.st-andre
 
 # install latest R version
 command    <- append(command, "sudo apt-get -y update")
-command    <- append(command, "sudo apt-get install -y r-base-core")
+command    <- append(command, "sudo apt-get install -y --force-yes r-base-core")
 
 #install packages (LOOP)
 
@@ -71,6 +71,6 @@ app_url = paste(Public_DNS,":3838",sep = "")
 print("WELL DONE!")
 print("you can find your shiny app at the following URL:")
 print(app_url)
-
+browseURL(app_url)
 }
 
