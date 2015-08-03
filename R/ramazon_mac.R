@@ -19,12 +19,12 @@ system(command)
 
 command    <- ("sudo apt-get -y update")
 command    <- append(command,"sudo apt-get -y upgrade")
-command <- append(command,"sudo chown -R ubuntu /etc/")
-command    <- append(command, "echo 'deb https://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list")
-
-#command    <- append(command, "mv /etc/apt/sources.list-new /etc/apt/sources.list")
+command <- append(command,"sudo chown -R ubuntu /etc/apt")
+command <- append(command,"sudo apt-key adv -keyserver keyserver.ubuntu.com -recv-keys E084DAB9")
+command <- append(command,"sudo add-apt-repository 'deb http://star-www.st-andrews.ac.uk/cran/bin/linux/ubuntu trusty/'")
 
 # install latest R version
+command    <- append(command, "sudo apt-get -y update")
 command    <- append(command, "sudo apt-get install -y r-base")
 
 #install packages (LOOP)
