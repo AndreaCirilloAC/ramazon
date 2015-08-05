@@ -5,9 +5,6 @@ Version: 0.1
 Date: 2015-08-05
 Author: Andrea Cirillo
 Maintainer: Andrea Cirillo <andreacirilloac@gmail.com>
-Description: the main aim of ramazon is to relieve the pain of publish shiny apps on Amazon EC2 instances.
-This is obtained providing a single function, ramazon(), able to take care of everything needed in order to
-install R, shiny-server and the user shiny app on a Ubuntu 14.0 server running on the Amazon EC2 instance.
-
+Description: the main aim of ramazon is to relieve the pain of publish shiny apps on Amazon EC2 instances.This is obtained providing a single function, ramazon(), able to take care of everything needed in order to install R, shiny-server and the user shiny app on a Ubuntu 14.0 server running on the Amazon EC2 instance.
 License: MIT
 LazyData: TRUE
