@@ -14,3 +14,4 @@ vignettes/*.pdf
 
 #key pair
 *keypair.pem
+.Rproj.user
