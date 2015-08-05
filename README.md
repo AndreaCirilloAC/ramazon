@@ -1,6 +1,4 @@
----
-output: html_document
----
+
 # ramazon package
 run your shiny App on Amazon AWS launching a function.
 No setup no pain, just hit that run button!
