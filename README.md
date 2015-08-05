@@ -1,11 +1,25 @@
-# ramazon
+---
+output: html_document
+---
+# ramazon package
 run your shiny App on Amazon AWS launching a function.
+No setup no pain, just hit that run button!
+
+##How to use it
 
 0. Develop your Shiny App
-1. Launch an instance on amazon AWS
-2. save your key pair into you shiny app folder
-3. run `ramazon(public_DNS, key_pair_name)`
-4. watch your app on Amazon!
+1. Launch an instance on amazon AWS (see aws doc here: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance_linux.html)
+2. save your key pair into your shiny app folder
+3. install ramazon package
+
+   `install.packages("devtools")` if needed
+   
+   `library(devtools)` if needed
+   
+   `install_github("andreacirilloac/ramazon")`
+   
+4. run `ramazon(public_DNS, key_pair_name)`, where `public_DNS` is your ec2 instance public\_DNS and `key_pair_name` is the name of your key pair file.
+5. watch your app on Amazon!
 
 ##What ramazon takes care of
 
