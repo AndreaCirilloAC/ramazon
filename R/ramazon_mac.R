@@ -7,9 +7,9 @@
 ramazon <- function(Public_DNS, key_pair_name){
 
 #set useful variables
-cd = getwd()
-key_pair_address = paste(cd,"/",key_pair_name,".pem", sep = "")
-user_server = paste("ubuntu@",Public_DNS, sep = "")
+current <-  getwd()
+key_pair_address <-  paste(current ,"/",key_pair_name,".pem", sep = "")
+user_server <-  paste("ubuntu@",Public_DNS, sep = "")
 #open file connection
 connection <-  file("bash_script.txt")
 command    <-  paste("chmod 400 ",key_pair_address,sep = "")
