@@ -1,4 +1,4 @@
-###############################################################
+unlink("sink-examp.txt")###############################################################
 #custom function to run shiny app on Amazon AWS instance
 #Copyright 2015 Andrea Cirillo
 #License: MIT license
@@ -26,6 +26,9 @@ command    <- append(command, "sudo apt-get -y update")
 command    <- append(command, "sudo apt-get install -y --force-yes r-base-core")
 
 #install packages (LOOP)
+#command <- append( command, "sudo su – \")
+command <- append(command, 'sudo su - \\')
+command <- append(command,"-c 'R -e \\'install.packages('shiny', repos='http://cran.rstudio.com/')\\'")
 
 # install latest Shiny server version
 command <- append(command,"echo 'R installed'")
