@@ -1,11 +1,10 @@
-
 # ramazon package
-run your shiny App on Amazon AWS launching a function.
+Run your shiny App on Amazon AWS launching a function.
 No setup no pain, just hit that run button!
 
 ##How to use it
 
-0. Develop your Shiny App
+0. Develop your Shiny App (http://shiny.rstudio.com)
 1. Launch an instance on amazon AWS (see aws doc here: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance_linux.html)
 2. save your key pair into your shiny app folder
 3. install ramazon package
