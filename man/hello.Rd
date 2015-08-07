@@ -22,6 +22,9 @@ WARNINGS:
 be sure your key is stored at the same level of other shiny app files.
 
 }
+\warnings{
+
+}
 \examples{
 
 Public_DNS    <-  "ec2-52-7-96-14.compute-1.amazonaws.com"
