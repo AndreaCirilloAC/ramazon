@@ -28,7 +28,7 @@ command    <- append(command, "sudo apt-get install -y --force-yes r-base-core")
 #install packages (LOOP)
 
 command <- append(command,"R")
-command <- append(comand,install.packages("shiny"))
+command <- append(command,"install.packages('shiny')")
 command <- append(command,"q('no')")
 
 #command <- append( command, "sudo su – \")
