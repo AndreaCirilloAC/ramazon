@@ -27,7 +27,7 @@ command    <- append(command, "sudo apt-get install -y --force-yes r-base-core")
 
 #install packages (LOOP)
 
-command <- append(command, "sudo R -e 'install.packages('shiny', repos = 'http://cran.rstudio.com/', dep = TRUE)'")
+command <- append(command, "sudo R -e 'install.packages('shiny',repos = 'http://cran.rstudio.com/')'")
 
 
 # install latest Shiny server version
