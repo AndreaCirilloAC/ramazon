@@ -27,8 +27,7 @@ command    <- append(command, "sudo apt-get install -y --force-yes r-base-core")
 
 #install packages (LOOP)
 
-command <- append(command, "sudo R -e 'install.packages('shiny',repos = 'http://cran.rstudio.com/')'")
-
+command <- append(command,cat("sudo su -\\-c \"R -e \\\"install.packages('shiny', repos = 'http://cran.rstudio.com/', dep = TRUE)\\\"\""))
 
 # install latest Shiny server version
 command <- append(command,"echo 'R installed'")
@@ -76,6 +75,3 @@ print("you can find your shiny app at the following URL:")
 print(app_url)
 browseURL(app_url)
 }
-
-
-#command <- append(command, "sudo su -c 'R -e 'install.packages('shiny', repos='http://cran.rstudio.com/')\'")
