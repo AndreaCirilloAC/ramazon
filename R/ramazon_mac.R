@@ -4,14 +4,14 @@
 #License: MIT license
 ###############################################################
 
-ramazon <- function(Public_DNS, key_pair_name){
+ramazon <- function(Public_DNS, key_pair_name,test = FALSE){
 
 #set useful variables
 current          <-  getwd()
 key_pair_address <-  paste(current ,"/",key_pair_name,".pem", sep = "")
 user_server      <-  paste("ubuntu@",Public_DNS, sep = "")
 #open file connection
-connection <-  file("bash_script.txt")
+
 command    <-  paste("chmod 400 ",key_pair_address,sep = "")
 system(command)
 # modify sources.list file to add cran repository
@@ -25,17 +25,23 @@ command <- append(command,"sudo add-apt-repository 'deb http://star-www.st-andre
 command    <- append(command, "sudo apt-get -y update")
 command    <- append(command, "sudo apt-get install -y --force-yes r-base-core")
 
+#write first part of bash_script
+write(command,"bash_script.txt",append = TRUE)
+
 #install packages (LOOP)
 
-command <- append(command,cat("sudo su -\\-c \"R -e \\\"install.packages('shiny', repos = 'http://cran.rstudio.com/', dep = TRUE)\\\"\""))
+sink("bash_script.txt", append = TRUE)
+message <-  cat("sudo su -\\-c \"R -e \\\"install.packages('shiny', repos = 'http://cran.rstudio.com/', dep = TRUE)\\\"\"")
+sink()
 
 # install latest Shiny server version
-command <- append(command,"echo 'R installed'")
+command <- c("\necho 'R installed'")
 command <- append(command,"sudo apt-get install -y gdebi-core")
 command <- append(command,"wget http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.3.0.403-amd64.deb")
 command <- append(command,"sudo gdebi --non-interactive shiny-server-1.3.0.403-amd64.deb")
 
 # add deleting permission
+command <- append(command,"")
 command <- append(command,"sudo chown -R ubuntu /srv/")
 
 # delete standard example
@@ -43,9 +49,7 @@ command  <- append(command,"rm -Rf /srv/shiny-server/index.html")
 command  <- append(command,"rm -Rf /srv/shiny-server/sample-apps")
 
 #write file
-
-writeLines(command, connection)
-close(connection)
+write(command,"bash_script.txt",append = TRUE)
 
 #rename file
 file.rename("bash_script.txt","bash_script.sh")
@@ -56,22 +60,28 @@ system("chmod 700 bash_script.sh")
 
 #connect and run script on remote server
 command <- paste("ssh -o StrictHostKeyChecking=no -v -i ",key_pair_address, " ",user_server," 'bash -s' < bash_script.sh",sep = "")
-system(command)
+if (test == FALSE) {
+  system(command)
 
-system("exit")
-# paste shiny app files
+  system("exit")
+  # paste shiny app files
 
-from_address <-  getwd()
-to_address   <-  paste( user_server,":/srv/shiny-server/",sep = "")
+  from_address <-  getwd()
+  to_address   <-  paste( user_server,":/srv/shiny-server/",sep = "")
 
-#copy from folder recursively
+  #copy from folder recursively
 
-system(paste("scp -v -i",key_pair_address, "-r",from_address,to_address,sep = " "))
+  system(paste("scp -v -i",key_pair_address, "-r",from_address,to_address,sep = " "))
 
-# navigate the app in a browser
-app_url = paste(Public_DNS,":3838",sep = "")
-print("WELL DONE!")
-print("you can find your shiny app at the following URL:")
-print(app_url)
-browseURL(app_url)
+  # navigate the app in a browser
+  app_url = paste(Public_DNS,":3838",sep = "")
+  print("WELL DONE!")
+  print("you can find your shiny app at the following URL:")
+  print(app_url)
+  browseURL(app_url)
+} else  {
+  print("bash script saved in current working directory")
 }
+
+}
+
