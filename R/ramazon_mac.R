@@ -75,9 +75,9 @@ if (test == FALSE) {
 
   # navigate the app in a browser
   app_url = paste(Public_DNS,":3838/",basename(getwd()),sep = "")
-  print("WELL DONE!")
-  print("you can find your shiny app at the following URL:")
-  print(app_url)
+  message("WELL DONE!")
+  message("YOU CAN FIND YOUR SHINY APP AT THE FOLLOWING URL:")
+  message(app_url)
   browseURL(app_url)
 } else  {
   print("bash script saved in current working directory")
