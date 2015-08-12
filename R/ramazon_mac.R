@@ -74,7 +74,7 @@ if (test == FALSE) {
   system(paste("scp -v -i",key_pair_address, "-r",from_address,to_address,sep = " "))
 
   # navigate the app in a browser
-  app_url = paste(Public_DNS,":3838",sep = "")
+  app_url = paste(Public_DNS,":3838/",basename(getwd()),sep = "")
   print("WELL DONE!")
   print("you can find your shiny app at the following URL:")
   print(app_url)
