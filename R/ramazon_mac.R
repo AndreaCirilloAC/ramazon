@@ -102,7 +102,7 @@ ramazon_update <- function(Public_DNS, key_pair_name,test = FALSE){
   system(command)
   # modify sources.list file to add cran repository
 
-  command <- ("echo 'update shiny app")
+  command <- ("echo 'update shiny app'")
 
   command  <- append(command,paste("rm -Rf /srv/shiny-server/",basename(getwd()),sep ="") )
 
