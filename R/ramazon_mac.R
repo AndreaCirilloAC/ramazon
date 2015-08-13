@@ -90,7 +90,7 @@ if (test == FALSE) {
 
 # ramazon_update function: deploy an application for update a shiny app previously deployed on Amazon AWS
 
-ramazon <- function(Public_DNS, key_pair_name,test = FALSE){
+ramazon_update <- function(Public_DNS, key_pair_name,test = FALSE){
 
   #set useful variables
   current          <-  getwd()
