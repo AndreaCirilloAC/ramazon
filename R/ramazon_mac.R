@@ -1,8 +1,10 @@
 ###############################################################
-#custom function to run shiny app on Amazon AWS instance
+#custom functions to run shiny app on Amazon AWS instance
 #Copyright 2015 Andrea Cirillo
 #License: MIT license
 ###############################################################
+
+# ramazon function: deploy an application for the first time on Amazon AWS
 
 ramazon <- function(Public_DNS, key_pair_name,test = FALSE){
 
@@ -84,4 +86,59 @@ if (test == FALSE) {
 }
 
 }
+######################################
 
+# ramazon_update function: deploy an application for update a shiny app previously deployed on Amazon AWS
+
+ramazon <- function(Public_DNS, key_pair_name,test = FALSE){
+
+  #set useful variables
+  current          <-  getwd()
+  key_pair_address <-  paste(current ,"/",key_pair_name,".pem", sep = "")
+  user_server      <-  paste("ubuntu@",Public_DNS, sep = "")
+  #open file connection
+
+  command    <-  paste("chmod 400 ",key_pair_address,sep = "")
+  system(command)
+  # modify sources.list file to add cran repository
+
+  command <- ("echo 'update shiny app")
+
+  command  <- append(command,paste("rm -Rf /srv/shiny-server/",basename(getwd()),sep ="") )
+
+  #write file
+  write(command,"bash_script.txt",append = TRUE)
+
+  #rename file
+  file.rename("bash_script.txt","bash_script.sh")
+
+  #set execute permission to the script
+
+  system("chmod 700 bash_script.sh")
+
+  #connect and run script on remote server
+  command <- paste("ssh -o StrictHostKeyChecking=no -v -i ",key_pair_address, " ",user_server," 'bash -s' < bash_script.sh",sep = "")
+  if (test == FALSE) {
+    system(command)
+
+    system("exit")
+    # paste shiny app files
+
+    from_address <-  getwd()
+    to_address   <-  paste( user_server,":/srv/shiny-server/",sep = "")
+
+    #copy from folder recursively
+
+    system(paste("scp -v -i",key_pair_address, "-r",from_address,to_address,sep = " "))
+
+    # navigate the app in a browser
+    app_url = paste(Public_DNS,":3838/",basename(getwd()),sep = "")
+    message("WELL DONE!")
+    message("YOU CAN FIND YOUR UPDATED SHINY APP AT THE FOLLOWING URL:")
+    message(app_url)
+    browseURL(app_url)
+  } else  {
+    print("bash script saved in current working directory")
+  }
+
+}
