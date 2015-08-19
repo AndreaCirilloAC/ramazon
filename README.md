@@ -2,7 +2,8 @@
 Run your shiny App on Amazon AWS launching a function.
 No setup no pain, just hit that run button!
 
-A detailed tutorial is given [here](https://andreacirilloblog.wordpress.com/2015/08/18/deploy-your-shiny-app-on-aws-with-a-function/)
+A detailed tutorial is given [here](https://andreacirilloblog.wordpress.com/2015/08/18/deploy-your-shiny-app-on-aws-with-a-function/).
+
 If you are already comfortable with Amazon AWS, find below a short tutorial.
 
 ##How to use it
