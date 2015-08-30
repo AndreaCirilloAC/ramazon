@@ -1,6 +1,6 @@
 Package: ramazon
 Type: Package
-Title: deploy your shiny app on Amazon AWS running a function
+Title: deploy your shiny app on Amazon AWS just running a function
 Version: 0.1
 Date: 2015-08-05
 Author: Andrea Cirillo
