@@ -30,7 +30,7 @@ command    <- append(command, "sudo apt-get install -y --force-yes r-base-core")
 #write first part of bash_script
 write(command,"bash_script.txt",append = TRUE)
 
-#install packages 
+#install packages
 
 #source ui.R and server.R
 source("ui.R")
@@ -49,7 +49,7 @@ packages     <-  paste(packages, ")",sep ="")
 #define command
 
 sink("bash_script.txt", append = TRUE)
-message <-  cat("sudo su -\\-c \"R -e \\\"install.packages('shiny', repos = 'http://cran.rstudio.com/', dep = TRUE)\\\"\"")
+message <-  cat("sudo su -\\-c \"R -e \\\"install.packages(",packages,", repos = 'http://cran.rstudio.com/', dep = TRUE)\\\"\"")
 sink()
 
 # install latest Shiny server version
