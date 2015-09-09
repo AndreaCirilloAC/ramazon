@@ -32,6 +32,8 @@ write(command,"bash_script.txt",append = TRUE)
 
 #install packages
 
+#detach all packages (except base and tools, handled below)
+detach()
 #source app files to load required packages
 if (file.exists("ui.R")){
 source("ui.R")
