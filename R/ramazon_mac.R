@@ -33,7 +33,7 @@ write(command,"bash_script.txt",append = TRUE)
 #install packages
 
 #source app files to load required packages
-if file.exists("ui.R"){
+if (file.exists("ui.R")){
 source("ui.R")
 source("server.R")
 }else {
