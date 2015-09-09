@@ -32,9 +32,12 @@ write(command,"bash_script.txt",append = TRUE)
 
 #install packages
 
-#source ui.R and server.R
+#source app files to load required packages
+if file.exists("ui.R"){
 source("ui.R")
 source("server.R")
+}else {
+source("app.R")}
 # detect all packages loaded
 environ      <- data.frame("envs" = (search()),stringsAsFactors = FALSE)
 # we don't want tools
