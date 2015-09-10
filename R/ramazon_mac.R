@@ -101,7 +101,7 @@ if (test == FALSE) {
   message("WELL DONE!")
   message("YOU CAN FIND YOUR SHINY APP AT THE FOLLOWING URL:")
   message(app_url)
-  browseURL(app_url)
+
 } else  {
   print("bash script saved in current working directory")
 }
@@ -157,7 +157,7 @@ ramazon_update <- function(Public_DNS, key_pair_name,test = FALSE){
     message("WELL DONE!")
     message("YOU CAN FIND YOUR UPDATED SHINY APP AT THE FOLLOWING URL:")
     message(app_url)
-    browseURL(app_url)
+
   } else  {
     print("bash script saved in current working directory")
   }
