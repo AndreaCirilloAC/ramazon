@@ -40,6 +40,10 @@ source("ui.R")
 source("server.R")
 }else {
 source("app.R")}
+# cover the case of global.R existance
+if (file.exists("global.R")){
+source("global.R")
+}
 # detect all packages loaded
 environ      <- data.frame("envs" = (search()),stringsAsFactors = FALSE)
 # we don't want tools
