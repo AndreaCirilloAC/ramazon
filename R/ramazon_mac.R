@@ -53,7 +53,7 @@ message <-  cat("sudo su -\\-c \"R -e \\\"install.packages(",packages,", repos =
 sink()
 
 # install latest Shiny server version
-command <- c("\necho 'R installed'")
+command <- c("\echo 'R installed'")
 command <- append(command,"sudo apt-get install -y gdebi-core")
 command <- append(command,"wget http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.3.0.403-amd64.deb")
 command <- append(command,"sudo gdebi --non-interactive shiny-server-1.3.0.403-amd64.deb")
