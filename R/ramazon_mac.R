@@ -42,11 +42,11 @@ env_loaded   <- env$loadedOnly
 env_loaded   <- attributes(env_loaded)
 env_loaded   <- env_loaded$names
 packages     <-  c(env_loaded, env_base)
-packages     <-  paste("'",packages,"'",sep ="")
+packages     <-  paste("'",packages,"'",sep = "")
 packages     <-  paste(packages,",",collapse = "")
-packages     <-  paste("c(",packages,sep ="")
-packages     <-  substr(packages,1,(nchar(packages)-1))
-packages     <-  paste(packages, ")",sep ="")
+packages     <-  paste("c(",packages,sep = "")
+packages     <-  substr(packages,1,(nchar(packages) - 1))
+packages     <-  paste(packages, ")",sep = "")
 
 #define command
 
