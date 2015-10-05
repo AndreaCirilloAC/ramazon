@@ -35,11 +35,13 @@ write(command,"bash_script.txt",append = TRUE)
 #source ui.R and server.R
 source("ui.R")
 source("server.R")
-# detect all packages loaded
-environ      <- data.frame("envs" = (search()),stringsAsFactors = FALSE)
-# we don't want tools
-environ <- environ[grepl("package",environ[,1]),]
-packages     <-  gsub("package:","",environ)
+# detect all packages loaded (even if not attached)
+env          <- sessionInfo()
+env_base     <- env$basePkgs
+env_loaded   <- env$loadedOnly
+env_loaded   <- attributes(env_loaded)
+env_loaded   <- env_loaded$names
+packages     <-  c(env_loaded, env_base)
 packages     <-  paste("'",packages,"'",sep ="")
 packages     <-  paste(packages,",",collapse = "")
 packages     <-  paste("c(",packages,sep ="")
