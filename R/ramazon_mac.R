@@ -35,13 +35,13 @@ write(command,"bash_script.txt",append = TRUE)
 #detach all packages (except base and tools, handled below)
 detach()
 #source app files to load required packages
-if (file.exists("ui.R")){
+if (file.exists("ui.R")) {
 source("ui.R")
 source("server.R")
 }else {
 source("app.R")}
 # cover the case of global.R existance
-if (file.exists("global.R")){
+if (file.exists("global.R")) {
 source("global.R")
 }
 # detect all packages loaded (even if not attached)
@@ -131,7 +131,7 @@ ramazon_update <- function(Public_DNS, key_pair_name,test = FALSE){
 
   command <- ("echo 'update shiny app'")
 
-  command  <- append(command,paste("rm -Rf /srv/shiny-server/",basename(getwd()),sep ="") )
+  command  <- append(command,paste("rm -Rf /srv/shiny-server/",basename(getwd()),sep = "") )
 
   #write file
   write(command,"bash_script.txt",append = TRUE)
