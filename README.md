@@ -2,11 +2,11 @@
 Run your shiny App on Amazon AWS launching a function.
 No setup no pain, just hit that run button!
 
-A detailed tutorial is given [here](https://andreacirilloblog.wordpress.com/2015/08/18/deploy-your-shiny-app-on-aws-with-a-function/).
+A detailed tutorial is provided [here](https://andreacirilloblog.wordpress.com/2015/08/18/deploy-your-shiny-app-on-aws-with-a-function/).
 
 If you are already comfortable with Amazon AWS, find below a short tutorial.
 
-##How to use it
+## How to use it
 
 0. Develop your Shiny App (http://shiny.rstudio.com)
 1. Launch an instance on amazon AWS (see aws doc here: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance_linux.html)
@@ -22,7 +22,7 @@ If you are already comfortable with Amazon AWS, find below a short tutorial.
 4. run `ramazon(public_DNS, key_pair_name)`, where `public_DNS` is your ec2 instance public\_DNS and `key_pair_name` is the name of your key pair file.
 5. watch your app on Amazon!
 
-##What ramazon takes care of
+## What ramazon takes care of
 
 * establish a connection
 * modify sources.list to add R Cran Server
