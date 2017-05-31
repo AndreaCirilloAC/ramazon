@@ -50,10 +50,7 @@ env_base     <- env$basePkgs
 env_loaded   <- env$loadedOnly
 env_loaded   <- attributes(env_loaded)
 env_loaded   <- env_loaded$names
-env_other    <- env$otherPkgs
-env_other    <- attributes(env_other)
-env_other    <- env_other$names
-packages     <- c(env_loaded, env_base,env_other)
+packages     <-  c(env_loaded, env_base)
 packages     <-  paste("'",packages,"'",sep = "")
 packages     <-  paste(packages,",",collapse = "")
 packages     <-  paste("c(",packages,sep = "")
@@ -69,8 +66,8 @@ sink()
 # install latest Shiny server version
 command <- c("\necho 'R installed'")
 command <- append(command,"sudo apt-get install -y gdebi-core")
-command <- append(command,"wget https://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.5.3.838-amd64.deb")
-command <- append(command,"sudo gdebi --non-interactive shiny-server-1.5.3.838-amd64.deb")
+command <- append(command,"wget http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.3.0.403-amd64.deb")
+command <- append(command,"sudo gdebi --non-interactive shiny-server-1.3.0.403-amd64.deb")
 
 # add deleting permission
 command <- append(command,"")
