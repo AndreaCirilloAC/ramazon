@@ -19,7 +19,7 @@ If you are already comfortable with Amazon AWS, find below a short tutorial.
    
    `install_github("andreacirilloac/ramazon")`
    
-4. run `ramazon(public_DNS, key_pair_name)`, where `public_DNS` is your ec2 instance public\_DNS and `key_pair_name` is the name of your key pair file.
+4. run `ramazon(Public_DNS, key_pair_name)`, where `Public_DNS` is your ec2 instance public\_DNS and `key_pair_name` is the name of your key pair file.
 5. watch your app on Amazon!
 
 ## What ramazon takes care of
