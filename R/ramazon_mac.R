@@ -66,14 +66,16 @@ sink("bash_script.txt", append = TRUE)
 message <-  cat("sudo su -\\-c \"R -e \\\"install.packages(",packages,", repos = 'http://cran.rstudio.com/', dep = TRUE)\\\"\"")
 sink()
 
+#XML is needed for this next chunk:
+#Here we parse the xml of download3.rstudio.org/
+#Using the rootsize we can extract the last entry which is the latest version of shiny server
 if(!require(XML)){
   install.packages("XML")
   library(XML)
 }
-
 xml.url <- 'http://download3.rstudio.org/'
-result <- xmlParse(xml.url)
-rootnode <- xmlRoot(result)
+xmlParsed <- xmlParse(xml.url)
+rootnode <- xmlRoot(xmlParsed)
 rootsize <- xmlSize(rootnode)
 latest_shiny_path <- xmlValue(rootnode[[rootsize]][[1]])
 shiny_version <- unlist(strsplit(latest_shiny_path,'/'))[3]
