@@ -66,11 +66,23 @@ sink("bash_script.txt", append = TRUE)
 message <-  cat("sudo su -\\-c \"R -e \\\"install.packages(",packages,", repos = 'http://cran.rstudio.com/', dep = TRUE)\\\"\"")
 sink()
 
+if(!require(XML)){
+  install.packages("XML")
+  library(XML)
+}
+
+xml.url <- 'http://download3.rstudio.org/'
+result <- xmlParse(xml.url)
+rootnode <- xmlRoot(result)
+rootsize <- xmlSize(rootnode)
+latest_shiny_path <- xmlValue(rootnode[[rootsize]][[1]])
+shiny_version <- unlist(strsplit(latest_shiny_path,'/'))[3]
+  
 # install latest Shiny server version
 command <- c("\necho 'R installed'")
 command <- append(command,"sudo apt-get install -y gdebi-core")
-command <- append(command,"wget https://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.5.3.838-amd64.deb")
-command <- append(command,"sudo gdebi --non-interactive shiny-server-1.5.3.838-amd64.deb")
+command <- append(command,paste0("wget https://download3.rstudio.org/",latest_shiny_path))
+command <- append(command,paste0("sudo gdebi --non-interactive ",shiny_version))
 
 # add deleting permission
 command <- append(command,"")
