@@ -76,10 +76,10 @@ sink()
 #  library(XML)
 #}
 xml.url <- 'http://download3.rstudio.org/'
-xmlParsed <- xmlParse(xml.url)
-rootnode <- xmlRoot(xmlParsed)
-rootsize <- xmlSize(rootnode)
-latest_shiny_path <- xmlValue(rootnode[[rootsize]][[1]])
+xmlParsed <- XML::xmlParse(xml.url)
+rootnode <- XML::xmlRoot(xmlParsed)
+rootsize <- XML::xmlSize(rootnode)
+latest_shiny_path <- XML::xmlValue(rootnode[[rootsize]][[1]])
 shiny_version <- unlist(strsplit(latest_shiny_path,'/'))[3]
   
 # install latest Shiny server version
