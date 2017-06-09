@@ -69,10 +69,12 @@ sink()
 #XML is needed for this next chunk:
 #Here we parse the xml of download3.rstudio.org/
 #Using the rootsize we can extract the last entry which is the latest version of shiny server
-if(!require(XML)){
-  install.packages("XML")
-  library(XML)
-}
+
+#added 'Import' to DESCRIPTION for XML
+#if(!require(XML)){
+#  install.packages("XML")
+#  library(XML)
+#}
 xml.url <- 'http://download3.rstudio.org/'
 xmlParsed <- xmlParse(xml.url)
 rootnode <- xmlRoot(xmlParsed)
