@@ -6,16 +6,10 @@
 
 # ramazon function: deploy an application for the first time on Amazon AWS
 
-ramazon <- function(Public_DNS, key_pair_name,test = FALSE){
+ramazon <- function(Public_DNS, key_pair_name = NULL, test = FALSE){
 
-#set useful variables
-current          <-  getwd()
-key_pair_address <-  paste(current ,"/",key_pair_name,".pem", sep = "")
-user_server      <-  paste("ubuntu@",Public_DNS, sep = "")
-#open file connection
+  setup_connection_variables(key_pair_name, Public_DNS)
 
-command    <-  paste("chmod 400 ",key_pair_address,sep = "")
-system(command)
 # modify sources.list file to add cran repository
 
 command <- ("sudo apt-get -y update")
@@ -24,8 +18,8 @@ command <- append(command,"sudo apt-key adv -keyserver keyserver.ubuntu.com -rec
 command <- append(command,"sudo add-apt-repository 'deb http://cran.rstudio.com/bin/linux/ubuntu trusty/'")
 
 # install latest R version
-command    <- append(command, "sudo apt-get -y update")
-command    <- append(command, "sudo apt-get install -y --force-yes r-base-core")
+command <- append(command, "sudo apt-get -y update")
+command <- append(command, "sudo apt-get install -y --force-yes r-base-core")
 
 #write first part of bash_script
 write(command,"bash_script.txt",append = TRUE)
@@ -81,7 +75,7 @@ rootnode <- XML::xmlRoot(xmlParsed)
 rootsize <- XML::xmlSize(rootnode)
 latest_shiny_path <- XML::xmlValue(rootnode[[rootsize]][[1]])
 shiny_version <- unlist(strsplit(latest_shiny_path,'/'))[3]
-  
+
 # install latest Shiny server version
 command <- c("\necho 'R installed'")
 command <- append(command,"sudo apt-get install -y gdebi-core")
@@ -96,6 +90,29 @@ command <- append(command,"sudo chown -R ubuntu /srv/")
 command  <- append(command,"rm -Rf /srv/shiny-server/index.html")
 command  <- append(command,"rm -Rf /srv/shiny-server/sample-apps")
 
+copy_files_to_server(command, Public_DNS, key_pair_address, user_server, test)
+
+}
+
+######################################
+
+# ramazon_update function: deploy an application for update a shiny app previously deployed on Amazon AWS
+
+ramazon_update <- function(Public_DNS, key_pair_name = NULL,test = FALSE){
+  
+  setup_connection_variables(key_pair_name, Public_DNS)
+  
+  command <- ("echo 'update shiny app'")
+  
+  command  <- append(command,paste0("rm -Rf /srv/shiny-server/",basename(getwd())) )
+  
+  copy_files_to_server(command, Public_DNS, key_pair_address, user_server, test)
+  
+}
+
+######################################
+
+copy_files_to_server <- function(command, Public_DNS, key_pair_address, user_server, test){
 #write file
 write(command,"bash_script.txt",append = TRUE)
 
@@ -132,59 +149,34 @@ if (test == FALSE) {
 }
 
 }
+
 ######################################
 
-# ramazon_update function: deploy an application for update a shiny app previously deployed on Amazon AWS
-
-ramazon_update <- function(Public_DNS, key_pair_name,test = FALSE){
-
+setup_connection_variables <- function(key_pair_name, Public_DNS){
   #set useful variables
-  current          <-  getwd()
-  key_pair_address <-  paste(current ,"/",key_pair_name,".pem", sep = "")
-  user_server      <-  paste("ubuntu@",Public_DNS, sep = "")
-  #open file connection
-
-  command    <-  paste("chmod 400 ",key_pair_address,sep = "")
-  system(command)
-  # modify sources.list file to add cran repository
-
-  command <- ("echo 'update shiny app'")
-
-  command  <- append(command,paste("rm -Rf /srv/shiny-server/",basename(getwd()),sep = "") )
-
-  #write file
-  write(command,"bash_script.txt",append = TRUE)
-
-  #rename file
-  file.rename("bash_script.txt","bash_script.sh")
-
-  #set execute permission to the script
-
-  system("chmod 700 bash_script.sh")
-
-  #connect and run script on remote server
-  command <- paste("ssh -o StrictHostKeyChecking=no -v -i ",key_pair_address, " ",user_server," 'bash -s' < bash_script.sh",sep = "")
-  if (test == FALSE) {
-    system(command)
-
-    system("exit")
-    # paste shiny app files
-
-    from_address <-  getwd()
-    to_address   <-  paste( user_server,":/srv/shiny-server/",sep = "")
-
-    #copy from folder recursively
-
-    system(paste("scp -v -i",key_pair_address, "-r",from_address,to_address,sep = " "))
-
-    # navigate the app in a browser
-    app_url = paste(Public_DNS,":3838/",basename(getwd()),sep = "")
-    message("WELL DONE!")
-    message("YOU CAN FIND YOUR UPDATED SHINY APP AT THE FOLLOWING URL:")
-    message(app_url)
-
-  } else  {
-    print("bash script saved in current working directory")
+  current <<- getwd()
+  
+  #automatically detect keypair file
+  if(is.null(key_pair_name)){
+    key_pair_name <- list.files(pattern = ".pem$")[1]
+    
+    if(is.na(key_pair_name)){
+      stop("No key pair file (.pem) found in current directory")
+    }
+    
+    message(paste("Using key pair file",key_pair_name))
+    key_pair_name <- gsub(".pem$","",key_pair_name)
+    key_pair_name <<- key_pair_name
   }
-
+  
+  key_pair_address <<- paste0(current ,"/",key_pair_name,".pem")
+  
+  if (!file.exists(key_pair_address)) {
+    stop(paste("Unable to find key pair file at:", key_pair_address))
+  }
+  
+  user_server <<- paste0("ubuntu@",Public_DNS)
+  #open file connection
+  
+  system(paste0("chmod 400 '",key_pair_address,"'"))
 }
