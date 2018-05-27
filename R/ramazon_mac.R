@@ -107,7 +107,7 @@ file.rename("bash_script.txt","bash_script.sh")
 system("chmod 700 bash_script.sh")
 
 #connect and run script on remote server
-command <- paste("ssh -o StrictHostKeyChecking=no -v -i ",key_pair_address, " ",user_server," 'bash -s' < bash_script.sh",sep = "")
+command <- paste0("ssh -o StrictHostKeyChecking=no -v -i '",key_pair_address,"' ",user_server," 'bash -s' < bash_script.sh")
 if (test == FALSE) {
   system(command)
 
@@ -115,14 +115,14 @@ if (test == FALSE) {
   # paste shiny app files
 
   from_address <-  getwd()
-  to_address   <-  paste( user_server,":/srv/shiny-server/",sep = "")
+  to_address   <-  paste0(user_server,":/srv/shiny-server/")
 
   #copy from folder recursively
 
-  system(paste("scp -v -i",key_pair_address, "-r",from_address,to_address,sep = " "))
+  system(paste0("scp -v -i '",key_pair_address,"' -r '",from_address,"' '",to_address,"'"))
 
   # navigate the app in a browser
-  app_url = paste(Public_DNS,":3838/",basename(getwd()),sep = "")
+  app_url = paste0(Public_DNS,":3838/",basename(getwd()))
   message("WELL DONE!")
   message("YOU CAN FIND YOUR SHINY APP AT THE FOLLOWING URL:")
   message(app_url)
