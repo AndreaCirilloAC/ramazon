@@ -8,7 +8,7 @@
 
 ramazon <- function(Public_DNS, key_pair_name = NULL, test = FALSE){
 
-  setup_connection_variables(key_pair_name, Public_DNS)
+  key_pair_address <- get_key_pair_address(key_pair_name)
 
 # modify sources.list file to add cran repository
 
@@ -90,7 +90,7 @@ command <- append(command,"sudo chown -R ubuntu /srv/")
 command  <- append(command,"rm -Rf /srv/shiny-server/index.html")
 command  <- append(command,"rm -Rf /srv/shiny-server/sample-apps")
 
-copy_files_to_server(command, Public_DNS, key_pair_address, user_server, test)
+copy_files_to_server(command, Public_DNS, key_pair_address, test)
 
 }
 
@@ -100,19 +100,19 @@ copy_files_to_server(command, Public_DNS, key_pair_address, user_server, test)
 
 ramazon_update <- function(Public_DNS, key_pair_name = NULL,test = FALSE){
   
-  setup_connection_variables(key_pair_name, Public_DNS)
+  key_pair_address <- get_key_pair_address(key_pair_name)
   
   command <- ("echo 'update shiny app'")
   
   command  <- append(command,paste0("rm -Rf /srv/shiny-server/",basename(getwd())) )
   
-  copy_files_to_server(command, Public_DNS, key_pair_address, user_server, test)
+  copy_files_to_server(command, Public_DNS, key_pair_address, test)
   
 }
 
 ######################################
 
-copy_files_to_server <- function(command, Public_DNS, key_pair_address, user_server, test){
+copy_files_to_server <- function(command, Public_DNS, key_pair_address, test){
 #write file
 write(command,"bash_script.txt",append = TRUE)
 
@@ -122,6 +122,8 @@ file.rename("bash_script.txt","bash_script.sh")
 #set execute permission to the script
 
 system("chmod 700 bash_script.sh")
+
+user_server <- paste0("ubuntu@",Public_DNS)
 
 #connect and run script on remote server
 command <- paste0("ssh -o StrictHostKeyChecking=no -v -i '",key_pair_address,"' ",user_server," 'bash -s' < bash_script.sh")
@@ -152,9 +154,9 @@ if (test == FALSE) {
 
 ######################################
 
-setup_connection_variables <- function(key_pair_name, Public_DNS){
+get_key_pair_address <- function(key_pair_name){
   #set useful variables
-  current <<- getwd()
+  current <- getwd()
   
   #automatically detect keypair file
   if(is.null(key_pair_name)){
@@ -166,17 +168,17 @@ setup_connection_variables <- function(key_pair_name, Public_DNS){
     
     message(paste("Using key pair file",key_pair_name))
     key_pair_name <- gsub(".pem$","",key_pair_name)
-    key_pair_name <<- key_pair_name
   }
   
-  key_pair_address <<- paste0(current ,"/",key_pair_name,".pem")
+  key_pair_address <- paste0(current ,"/",key_pair_name,".pem")
   
   if (!file.exists(key_pair_address)) {
     stop(paste("Unable to find key pair file at:", key_pair_address))
   }
   
-  user_server <<- paste0("ubuntu@",Public_DNS)
   #open file connection
   
   system(paste0("chmod 400 '",key_pair_address,"'"))
+  
+  return(key_pair_address)
 }
